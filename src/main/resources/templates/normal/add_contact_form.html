@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8" />
+<title>this is home page</title>
+</head>
+<body>
+
+	<section>
+		<div class="card mr-3 ml-3">
+			<div class="card-body">
+
+				<h1 class="text-center">Add Contact</h1>
+
+				<div class="container-fuild mt-1">
+
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+
+							<form novalidate th:action="@{/user/process-contact}"
+								th:object="${contact}" enctype="multipart/form-data"
+								method="post" class="mt-2">
+
+
+								<!--  first name -->
+
+								<div class="input-group">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">
+
+											<i class="fa fa-plus"></i>
+
+										</div>
+
+									</div>
+
+									<input type="text" id="firstname" name="name"
+										placeholder="Enter Name here" class="form-control"
+										th:classappend="${#fields.hasErrors('name')?'is-invalid':''}"
+										th:value="${contact.name}" required>
+
+									<div class="invalid-feedback"
+										th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
+
+								</div>
+
+								<!-- Second Name -->
+
+								<div class="input-group mt-3">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">
+
+											<i class="fas fa-user-alt"></i>
+
+										</div>
+
+									</div>
+
+									<input type="text" id="secondName" name="secondName"
+										placeholder="Enter Nick Name here" class="form-control"
+										required>
+
+								</div>
+
+
+								<!-- Phone field -->
+
+								<div class="input-group mt-3">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">
+
+											<i class="fas fa-phone"></i>
+
+										</div>
+
+									</div>
+
+									<input type="number" id="phone" name="phone"
+										th:value="${contact.phone}"
+										th:classappend="${#fields.hasErrors('phone')?'is-invalid':''}"
+										placeholder="Enter Mobile Number here" class="form-control"
+										required>
+
+									<div class="invalid-feedback"
+										th:each="e : ${#fields.errors('phone')}" th:text="${e}"></div>
+
+
+								</div>
+
+
+								<!-- Email field -->
+
+								<div class="input-group mt-3">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">@</div>
+
+									</div>
+
+									<input type="email" id="email" name="email"
+										placeholder="Enter Email here" class="form-control" required>
+
+								</div>
+
+								<!-- work field -->
+
+								<div class="input-group mt-3">
+
+									<div class="input-group-prepend">
+
+										<div class="input-group-text">
+
+											<i class="fas fa-briefcase"></i>
+
+										</div>
+
+									</div>
+
+									<input type="text" id="work" name="work"
+										placeholder="Enter work here" class="form-control" required
+										th:classappend="${#fields.hasErrors('work')?'is-invalid':''}"
+										th:value="${contact.work}">
+									<div class="invalid-feedback"
+										th:each="e : ${#fields.errors('work')}" th:text="${e}"></div>
+
+								</div>
+
+								<!-- contact Description -->
+
+								<div class="form-group mt-3">
+
+									<textarea placeholder="Enter Contact Description"
+										name="description" id="description" rows="10"
+										class="form-control"
+										th:classappend="${#fields.hasErrors('description')?'is-invalid':''}"
+										th:text="${contact.description}"></textarea>
+									<div class="invalid-feedback"
+										th:each="e : ${#fields.errors('description')}" th:text="${e}"></div>
+
+
+								</div>
+
+								<!-- contact image -->
+
+								<div class="custom-file">
+
+									<input type="file" name="profileimage" />
+
+								</div>
+
+								<div class="container text-center">
+
+									<button class="btn bg-primary text-white">Save Contact</button>
+
+								</div>
+
+							</form>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+		<script
+			src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js"
+			referrerpolicy="origin"></script>
+		<script type="text/javascript">
+		tinymce.init({
+			  selector: '#description'
+			});
+		</script>
+
+		<script>
+	
+	$(document).ready(()=>{
+		$(".item").removeClass("active");
+		$("#add-link").addClass("active");
+		
+	});
+	
+	</script>
+
+
+	</section>
+</body>
+</html>
